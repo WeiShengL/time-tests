@@ -12,7 +12,8 @@ def test_no_overlap():
     expected = "Time range does not overlap"
     assert compute_overlap_time(large, short) == [expected]
 
-# def test_several_intervals():
-#     large = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00", 2, 60)
-#     short = time_range("2010-12-12 12:30:00", "2010-01-12 12:45:00", 2, 60)
-#     expected = []
+def test_several_intervals():
+    large = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00", 2, 60)
+    short = time_range("2010-01-12 10:30:00", "2010-01-12 14:30:00", 2, 60)
+    expected = [("2010-01-12 10:30:00", "2010-01-12 10:59:30"), "Time range does not overlap", ("2010-01-12 11:00:30", "2010-01-12 12:00:00"), "Time range does not overlap"]
+    assert compute_overlap_time(large, short) == expected
