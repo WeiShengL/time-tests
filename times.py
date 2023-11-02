@@ -17,10 +17,19 @@ def compute_overlap_time(range1, range2):
         for start2, end2 in range2:
             low = max(start1, start2)
             high = min(end1, end2)
-            overlap_time.append((low, high))
+            if low < high:
+                overlap_time.append((low, high))
+            else:
+                return "Time range does not overlap"
+
     return overlap_time
 
 if __name__ == "__main__":
     large = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00")
-    short = time_range("2010-01-12 10:30:00", "2010-01-12 10:45:00", 2, 60)
+    short = time_range("2010-01-12 10:30:00", "2010-01-12 14:30:00", 2, 60)
+    print(compute_overlap_time(large, short))
+
+    # This timerange needs fixing
+    large = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00")
+    short = time_range("2010-01-12 10:30:00", "2010-01-12 14:30:00", 2, 60)
     print(compute_overlap_time(large, short))
